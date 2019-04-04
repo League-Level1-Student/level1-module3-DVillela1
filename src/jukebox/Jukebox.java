@@ -5,6 +5,8 @@ package jukebox;
  */
 
 
+import java.awt.event.MouseEvent;
+import java.awt.event.MouseListener;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.InputStream;
@@ -12,7 +14,10 @@ import java.net.URL;
 
 import javax.swing.Icon;
 import javax.swing.ImageIcon;
+import javax.swing.JButton;
+import javax.swing.JFrame;
 import javax.swing.JLabel;
+import javax.swing.JPanel;
 import javax.swing.SwingUtilities;
 
 import javazoom.jl.player.advanced.AdvancedPlayer;
@@ -20,8 +25,11 @@ import javazoom.jl.player.advanced.AdvancedPlayer;
 /*   If you don't have javazoom.jar in your project, you can download it from here: http://bit.ly/javazoom
  *   Right click your project and add it as a JAR (Under Java Build Path > Libraries).*/
 
-public class Jukebox implements Runnable {
-
+public class Jukebox implements Runnable, MouseListener {
+	
+		static JButton unbothered = new JButton();		
+		static JButton makebelieve = new JButton();		
+		static JButton anything = new JButton();
     public void run() {
 
 		// 1. Find an mp3 on your computer or on the Internet.
@@ -36,6 +44,26 @@ public class Jukebox implements Runnable {
 		 * cover is clicked, stop the currently playing song, and play the one
 		 * that was selected.
 		 */
+		JFrame frame = new JFrame();
+		frame.setTitle("Play Song");
+		frame.setVisible(true);
+		JPanel panel = new JPanel();
+		panel.setVisible(true);
+		frame.add(panel);
+
+		anything.addMouseListener(this);
+		anything.setText("Anything - Wifisfuneral & Robb Bank$");
+		panel.add(anything);
+		anything.setVisible(true);
+		unbothered.addMouseListener(this);
+		unbothered.setText("Unbothered - Ski Mask the Slump God");
+		panel.add(unbothered);
+		unbothered.setVisible(true);
+		makebelieve.addMouseListener(this);
+		makebelieve.setText("Make Believe - Juice WRLD");
+		panel.add(makebelieve);
+		makebelieve.setVisible(true);
+		frame.pack();
     }
     
     
@@ -44,6 +72,43 @@ public class Jukebox implements Runnable {
 		URL imageURL = getClass().getResource(fileName);
 		Icon icon = new ImageIcon(imageURL);
 		return new JLabel(icon);
+	}
+
+
+	@Override
+	public void mouseClicked(MouseEvent e) {
+		JButton pressed = (JButton) e.getSource();
+		if (pressed = this.anything) {
+			new Song("Anything.mp3");
+		}
+	}
+
+
+	@Override
+	public void mousePressed(MouseEvent e) {
+		// TODO Auto-generated method stub
+		
+	}
+
+
+	@Override
+	public void mouseReleased(MouseEvent e) {
+		// TODO Auto-generated method stub
+		
+	}
+
+
+	@Override
+	public void mouseEntered(MouseEvent e) {
+		// TODO Auto-generated method stub
+		
+	}
+
+
+	@Override
+	public void mouseExited(MouseEvent e) {
+		// TODO Auto-generated method stub
+		
 	}
 
 }
